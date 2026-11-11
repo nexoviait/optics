@@ -1,0 +1,43 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# 3D models for the 360° view (binary glTF).
+<IfModule mod_mime.c>
+    AddType model/gltf-binary .glb
+    AddType model/vnd.usdz+zip .usdz
+</IfModule>
+
+# Long-lived caching for media. Generated renditions, 360° frames, 3D models and Vite
+# assets have unique file names, so they can be cached "forever"; other images
+# (bundled demo photos, uploads that may be replaced in place) get a week.
+<IfModule mod_headers.c>
+    <FilesMatch "\.(?:webp|avif|jpe?g|png|gif|svg|glb|usdz)$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+    <If "%{REQUEST_URI} =~ m#/storage/products/\d+/(?:renditions|spin|model)/# || %{REQUEST_URI} =~ m#/build/assets/#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+</IfModule>

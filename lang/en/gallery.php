@@ -1,0 +1,40 @@
+<?php
+
+// Strings for the product gallery, fullscreen viewer and 360° view (React PDP).
+// `:n`, `:total` and `:name` are replaced on the client.
+return [
+    'region' => 'Product gallery with :total images',
+    'image_alt' => ':name — view :n',
+    'slide_status' => 'Image :n of :total',
+    'open_viewer' => 'Open image :n full screen',
+    'show_image' => 'Show image :n',
+    'previous' => 'Previous image',
+    'next' => 'Next image',
+    'close' => 'Close',
+    'viewer_label' => ':name image viewer',
+    'zoom_in' => 'Zoom in',
+    'zoom_out' => 'Zoom out',
+    'zoom_hint' => 'Double-click or pinch to zoom · drag to pan',
+    'photos' => 'Photos',
+    'spin' => '360°',
+    'try_on' => 'Try On',
+    'spin_label' => '360° view of :name',
+    'spin_loading' => 'Loading 360° view… :percent%',
+    'spin_hint' => 'Drag to rotate · ← → to step · Space to pause',
+    'model_hint' => 'Drag to turn · pinch or scroll to zoom',
+    'view_in_ar' => 'View in your space',
+    'pause_rotation' => 'Pause rotation',
+    'play_rotation' => 'Play rotation',
+    'rotate_left' => 'Rotate left',
+    'rotate_right' => 'Rotate right',
+    'view_types' => [
+        'front' => 'Front',
+        'angle' => 'Angled',
+        'side' => 'Side',
+        'model_female' => 'On model',
+        'model_male' => 'On model',
+        'top' => 'Top',
+        'case' => 'Case & packaging',
+        'other' => 'Detail',
+    ],
+];

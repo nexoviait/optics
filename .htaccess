@@ -1,0 +1,10 @@
+# Safety net for hosts whose web root is this folder instead of /public.
+# Nothing outside /public may ever be served: .env holds the app key and database password.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?!public/)(.*)$ public/$1 [L]
+</IfModule>
+
+<FilesMatch "^\.env">
+    Require all denied
+</FilesMatch>
